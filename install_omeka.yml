@@ -4,9 +4,36 @@
   become: yes
   become_method: sudo
 
+
+  vars_prompt:
+    - name: mysql_root_password
+      prompt: "Please enter the MySQL root user's password:"
+      private: yes
+      confirm: yes
+
+    - name: omeka_password
+      prompt: "Please enter the omeka database user's password:"
+      private: yes
+      confirm: yes
+
+
   vars:
-    ntp_timezone: America/Toronto
+    ntp_timezone: America/Vancouver
+
+    omeka_db_name: "omeka_db"
+
+    mysql_databases:
+    - name: "{{ omeka_db_name }}"
+      encoding: utf8 
+      collation: utf8_general_ci
+
+    mysql_users:
+    - name: omeka_user
+      host: "%"
+      password: "{{ omeka_password }}"
+      priv: "{{ omeka_db_name }}.*:ALL"
+
 
   roles:
-- { role: geerlingguy.ntp }
-
+  - { role: geerlingguy.ntp }
+  - { role: geerlingguy.mysql}
