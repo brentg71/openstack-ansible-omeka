@@ -19,6 +19,7 @@
 
   vars:
     ntp_timezone: America/Vancouver
+    server_fqdn: "206-12-98-66.cloud.computecanada.ca"
 
     omeka_db_name: "omeka_db"
 
@@ -33,7 +34,36 @@
       password: "{{ omeka_password }}"
       priv: "{{ omeka_db_name }}.*:ALL"
 
+    openssl_certs_path: "/etc/ssl/certs/apache-selfsigned.crt"
+    openssl_keys_path: "/etc/ssl/private/apache-selfsigned.key"
+    openssl_default_key_owner: root
+    openssl_default_key_group: root
+    openssl_default_cert_owner: root
+    openssl_default_cert_group: root
+    
+    openssl_config:
+      default_bits: 2048
+      countryName_default: "CA"
+      stateOrProvinceName_default: "Vancouver"
+      localityName_default: "British Columbia"
+      organizationName_default: "UBC"
+      organizationalUnitName_default: "ARC"
+      commonName_default: "{{ server_fqdn }}"
+
+    openssl_self_signed:
+    - name: "{{ server_fqdn }}"
+      domains:
+      - "{{ server_fqdn }}"
+      country: "{{ openssl_config.countryName_default }}"
+      state: "{{ openssl_config.stateOrProvinceName_default }}"
+      city: "{{ openssl_config.localityName_default }}"
+      organization: "{{ openssl_config.organizationName_default }}"
+      unit: "{{ openssl_config.organizationalUnitName_default }}"
+      email: "support@computecanada.ca"
+      days: "3650"
+
 
   roles:
   - { role: geerlingguy.ntp }
-  - { role: geerlingguy.mysql}
+  - { role: geerlingguy.mysql }
+  - { role: franklinkim.openssl }
