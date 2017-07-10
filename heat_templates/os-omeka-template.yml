@@ -238,7 +238,6 @@ resources:
               - echo -n "PRIVATEIP " >> /etc/hosts
               - cat /etc/hostname >> /etc/hosts
               - cd /tmp
-              - ["bash","./install_ansible.sh"]
               - ["git","clone","GITREPOURL","LOCALREPODIR"]
               - ["cd","LOCALREPODIR"]
               - ["bash","SCRIPTCMD"]
