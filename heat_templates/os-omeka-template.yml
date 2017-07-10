@@ -242,6 +242,7 @@ resources:
               - ["git","clone","GITREPOURL","LOCALREPODIR"]
               - ["cd","LOCALREPODIR"]
               - ["bash","SCRIPTCMD"]
+              - ["rm","-rfv","LOCALREPODIR"]
           params:
             DOUPDATES: { get_param: do_updates }
             DOUPGRADES: { get_param: do_upgrades }
