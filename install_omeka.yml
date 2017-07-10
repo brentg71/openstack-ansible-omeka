@@ -1,0 +1,12 @@
+---
+# install_omeka.yml
+- hosts: local
+  become: yes
+  become_method: sudo
+
+  vars:
+    ntp_timezone: America/Toronto
+
+  roles:
+- { role: geerlingguy.ntp }
+
