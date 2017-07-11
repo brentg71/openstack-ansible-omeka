@@ -20,7 +20,8 @@
   vars:
     ntp_timezone: America/Vancouver
     server_public_ip: "{{ lookup('pipe', 'curl http://169.254.169.254/latest/meta-data/public-ipv4') }}"
-    server_fqdn: "206-12-98-66.cloud.computecanada.ca"
+    server_public_domain: "cloud.computecanada.ca"
+    server_fqdn: "{{ server_public_ip | regex_replace('\\.', '-') }}.{{ server_public_domain }}"
 
     omeka_db_name: "omeka_db"
 
@@ -80,19 +81,22 @@
     apache_ssl_protocol: "All -SSLv2 -SSLv3"
     apache_ssl_cipher_suite: "AES256+EECDH:AES256+EDH"
 
-
-    test_var: "{{ lookup('pipe', 'host {{ server_public_ip }}' ) }}"
+    php_memory_limit: "128M"
+    php_max_execution_time: "90"
+    php_upload_max_filesize: "256M"
+    php_packages:
+    - php
+    - php-cli
+    - php-common
+    - php-gd
+    - php-xml
 
   roles:
   - { role: geerlingguy.ntp }
   - { role: geerlingguy.mysql }
   - { role: franklinkim.openssl }
   - { role: geerlingguy.apache }
-
-  tasks:
-  - debug:
-      msg: "{{ server_public_ip }}"
-
-  - debug:
-      msg: "{{ test_var }}"
+  - { role: geerlingguy.php }
+  - { role: geerlingguy.php-mysql }
+  - { role: zerohacks.imagemagick }
 

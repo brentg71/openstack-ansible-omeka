@@ -3,6 +3,7 @@
 - src: geerlingguy.mysql
 - src: franklinkim.openssl
 - src: geerlingguy.apache
-#- src: geerlingguy.php
-#- src: geerlingguy.php-mysql
+- src: geerlingguy.php
+- src: geerlingguy.php-mysql
+- src: zerohacks.imagemagick
 
