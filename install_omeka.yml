@@ -90,6 +90,7 @@
     - php-common
     - php-gd
     - php-xml
+    - libapache2-mod-php
 
   roles:
   - { role: geerlingguy.ntp }
