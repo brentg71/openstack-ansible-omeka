@@ -90,7 +90,6 @@
     - php-common
     - php-gd
     - php-xml
-    - libapache2-mod-php
 
   roles:
   - { role: geerlingguy.ntp }
@@ -98,6 +97,7 @@
   - { role: franklinkim.openssl }
   - { role: geerlingguy.apache }
   - { role: geerlingguy.php }
+  - { role: geerlingguy.apache-php-fpm }
   - { role: geerlingguy.php-mysql }
   - { role: zerohacks.imagemagick }
 
