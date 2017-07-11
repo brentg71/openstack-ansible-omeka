@@ -24,6 +24,7 @@
     server_fqdn: "{{ server_public_ip | regex_replace('\\.', '-') }}.{{ server_public_domain }}"
 
     omeka_db_name: "omeka_db"
+    omeka_db_prefix: "omeka_"
 
     mysql_databases:
     - name: "{{ omeka_db_name }}"
