@@ -234,6 +234,7 @@ resources:
             package_upgrade: DOUPGRADES
             packages:
               - git
+              - unzip
             runcmd:
               - echo -n "PRIVATEIP " >> /etc/hosts
               - cat /etc/hostname >> /etc/hosts
