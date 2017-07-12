@@ -235,6 +235,7 @@ resources:
             packages:
               - git
               - unzip
+              - apg
             runcmd:
               - echo -n "PRIVATEIP " >> /etc/hosts
               - cat /etc/hostname >> /etc/hosts
