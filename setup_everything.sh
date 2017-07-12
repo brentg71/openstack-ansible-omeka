@@ -1,13 +1,16 @@
 #!/bin/bash
 
 # Script variables
+###
+### NOTE: requires the apg package (installed via Heat Template)
+###
 PASSWD_GEN_CMD="apg -c cl_seed -n 1 -m 20 -M NC"
 
-# Generate random password for MySQL
+# Generate random passwords for MySQL accounts
 MYSQL_ROOT_PASSWORD=`${PASSWD_GEN_CMD}`
 MYSQL_OMEKA_PASSWORD=`${PASSWD_GEN_CMD}`
 
-# Install Ansible Galaxy roles
+# Install requisite Ansible Galaxy roles
 ansible-galaxy install -r requirements.yml
 
 # Run the default playbook
