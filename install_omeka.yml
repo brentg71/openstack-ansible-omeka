@@ -5,18 +5,6 @@
   become_method: sudo
 
 
-  vars_prompt:
-    - name: mysql_root_password
-      prompt: "Please enter the MySQL root user's password:"
-      private: yes
-      confirm: yes
-
-    - name: omeka_password
-      prompt: "Please enter the omeka database user's password:"
-      private: yes
-      confirm: yes
-
-
   vars:
     ntp_timezone: America/Vancouver
     server_public_ip: "{{ lookup('pipe', 'curl http://169.254.169.254/latest/meta-data/public-ipv4') }}"
@@ -24,11 +12,12 @@
     server_fqdn: "{{ server_public_ip | regex_replace('\\.', '-') }}.{{ server_public_domain }}"
 
 
+    mysql_root_password: "{{ lookup('pipe', 'apg -c cl_seed -n 1 -m 20 -M NC') }}"
+    omeka_password: "{{ lookup('pipe', 'apg -c cl_seed -n 1 -m 20 -M NC') }}"
+    
     omeka_db_user: "omeka_user"
     omeka_db_name: "omeka_db"
     omeka_db_prefix: "omeka_"
-
-    mysql_user_password_update: no
 
     mysql_databases:
     - name: "{{ omeka_db_name }}"
@@ -96,6 +85,14 @@
     - php-gd
     - php-xml
     - libapache2-mod-php
+
+
+  pre_tasks:
+  - debug:
+      msg: "{{ mysql_root_password }}"
+
+  - debug:
+      msg: "{{ omeka_password }}"
 
 
   roles:
