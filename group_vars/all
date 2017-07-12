@@ -1,0 +1,4 @@
+---
+
+web_document_root: "/var/www/html"
+omeka_document_root: "{{ web_document_root }}/omeka"

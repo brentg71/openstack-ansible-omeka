@@ -23,10 +23,12 @@
     server_public_domain: "cloud.computecanada.ca"
     server_fqdn: "{{ server_public_ip | regex_replace('\\.', '-') }}.{{ server_public_domain }}"
 
+
+    omeka_db_user: "omeka_user"
     omeka_db_name: "omeka_db"
     omeka_db_prefix: "omeka_"
 
-    mysql_user_password_update: yes
+    mysql_user_password_update: no
 
     mysql_databases:
     - name: "{{ omeka_db_name }}"
@@ -34,7 +36,7 @@
       collation: utf8_general_ci
 
     mysql_users:
-    - name: omeka_user
+    - name: "{{ omeka_db_user }}"
       host: "%"
       password: "{{ omeka_password }}"
       priv: "{{ omeka_db_name }}.*:ALL"
@@ -71,13 +73,13 @@
 
     apache_vhosts:
     - servername: "{{ server_fqdn }}"
-      documentroot: "/var/www/html"
+      documentroot: "{{ web_document_root }}"
       extra_parameters: |
         Redirect permanent "/" "https://{{ server_fqdn }}/"
 
     apache_vhosts_ssl:
     - servername: "{{ server_fqdn }}"
-      documentroot: "/var/www/html"
+      documentroot: "{{ web_document_root }}"
       certificate_file: "{{ openssl_certs_path }}/{{ server_fqdn }}.crt"
       certificate_key_file: "{{ openssl_keys_path }}/{{ server_fqdn }}.key"
 
@@ -95,6 +97,7 @@
     - php-xml
     - libapache2-mod-php
 
+
   roles:
   - { role: geerlingguy.ntp }
   - { role: geerlingguy.mysql }
@@ -104,4 +107,5 @@
   - { role: geerlingguy.apache-php-fpm }
   - { role: geerlingguy.php-mysql }
   - { role: zerohacks.imagemagick }
+  - { role: arc-install-omeka, tags: ['omeka'] }
 
