@@ -11,9 +11,8 @@
     server_public_domain: "cloud.computecanada.ca"
     server_fqdn: "{{ server_public_ip | regex_replace('\\.', '-') }}.{{ server_public_domain }}"
 
-
-    mysql_root_password: "{{ lookup('pipe', 'apg -c cl_seed -n 1 -m 20 -M NC') }}"
-    omeka_password: "{{ lookup('pipe', 'apg -c cl_seed -n 1 -m 20 -M NC') }}"
+    mysql_root_password_update: yes
+    mysql_user_password_update: yes
     
     omeka_db_user: "omeka_user"
     omeka_db_name: "omeka_db"
@@ -85,14 +84,6 @@
     - php-gd
     - php-xml
     - libapache2-mod-php
-
-
-  pre_tasks:
-  - debug:
-      msg: "{{ mysql_root_password }}"
-
-  - debug:
-      msg: "{{ omeka_password }}"
 
 
   roles:
