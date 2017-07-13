@@ -1,10 +1,7 @@
 #!/bin/bash
 
 # Script variables
-###
-### NOTE: requires the apg package (installed via Heat Template)
-###
-PASSWD_GEN_CMD="apg -c cl_seed -n 1 -m 20 -M NC"
+PASSWD_GEN_CMD="openssl rand -base64 16"
 
 # Generate random passwords for MySQL accounts
 MYSQL_ROOT_PASSWORD=`${PASSWD_GEN_CMD}`
