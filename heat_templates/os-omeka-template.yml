@@ -184,6 +184,8 @@ resources:
         str_replace:
           template: |
             #cloud-config
+            apt_sources:
+              - source: "ppa:ansible/ansible"
             package_update: DOUPDATES
             package_upgrade: DOUPGRADES
             packages:
