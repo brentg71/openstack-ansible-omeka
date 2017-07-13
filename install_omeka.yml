@@ -5,6 +5,13 @@
   become_method: sudo
 
 
+  pre_tasks:
+  - name: Append proper hostname entry to /etc/hosts
+    lineinfile:
+      path: "/etc/hosts"
+      line: "{{ server_local_ip }}    {{ server_hostname }}"
+
+
   roles:
   - { role: geerlingguy.ntp }
   - { role: geerlingguy.mysql }

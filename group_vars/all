@@ -1,6 +1,8 @@
 ---
 
 # Server ext IP and hostname variables
+server_hostname: "{{ lookup('pipe', 'cat /etc/hostname') }}"
+server_local_ip: "{{ lookup('pipe', 'curl http://169.254.169.254/latest/meta-data/local-ipv4') }}"
 server_public_ip: "{{ lookup('pipe', 'curl http://169.254.169.254/latest/meta-data/public-ipv4') }}"
 server_public_domain: "cloud.computecanada.ca"
 server_fqdn: "{{ server_public_ip | regex_replace('\\.', '-') }}.{{ server_public_domain }}"
