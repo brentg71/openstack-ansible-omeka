@@ -13,7 +13,6 @@ parameter_groups:
     - sg_https_port
     - private_network
     - private_subnet
-    - private_ip
     - public_network
     - kp_name
     - vol_name
@@ -27,10 +26,7 @@ parameter_groups:
     parameters:
     - do_updates
     - do_upgrades
-    - git_repo_url
-    - local_repo_dir
-    - script_cmd
-
+   
 
 parameters:
   sg_name:
@@ -74,16 +70,6 @@ parameters:
       - allowed_values:
         - 7a5b3a38-8ff0-4711-b3a6-fbde349878f8
         - 5decb68b-3172-42a9-8dc9-7e8b1e2a7515
-
-  private_ip:
-    type: string
-    label: Specify the private IP address (west-cloud/east-cloud)
-    description: Private IP address subnet reserved for this instance
-    default: 192.168.216.111
-    constraints:
-      - allowed_values:
-        - 192.168.216.111
-        - 192.168.31.111
 
   public_network:
     type: string
@@ -157,24 +143,6 @@ parameters:
         - "true"
         - "false"
 
-  git_repo_url:
-    type: string
-    label: omnibus-ansible git repository URL
-    description: URL to the git repo where the script is maintained
-    default: https://github.com/neillturner/omnibus-ansible.git
-
-  local_repo_dir:
-    type: string
-    label: omnibus-ansible repo directory
-    description: Directory into which the git repo is cloned
-    default: /tmp/omnibus-ansible
-
-  script_cmd:
-    type: string
-    label: omnibus-ansible executable command
-    description: Script used to bootstrap Ansible
-    default: ansible_install.sh
-
 
 resources:
   instance_security_group:
@@ -201,7 +169,6 @@ resources:
     properties:
       fixed_ips:
         - subnet_id: { get_param: private_subnet }
-          ip_address: { get_param: private_ip }
       network: { get_param: private_network }
       security_groups:
         - { get_resource: instance_security_group }
@@ -235,22 +202,10 @@ resources:
             packages:
               - git
               - unzip
-              - apg
-            runcmd:
-              - echo -n "PRIVATEIP " >> /etc/hosts
-              - cat /etc/hostname >> /etc/hosts
-              - cd /tmp
-              - ["git","clone","GITREPOURL","LOCALREPODIR"]
-              - ["cd","LOCALREPODIR"]
-              - ["bash","SCRIPTCMD"]
-              - ["rm","-rfv","LOCALREPODIR"]
+              - ansible
           params:
             DOUPDATES: { get_param: do_updates }
             DOUPGRADES: { get_param: do_upgrades }
-            PRIVATEIP: { get_param: private_ip }
-            GITREPOURL: { get_param: git_repo_url }
-            LOCALREPODIR: { get_param: local_repo_dir }
-            SCRIPTCMD: { get_param: script_cmd }
 
   instance_floating_ip:
     type: OS::Neutron::FloatingIP
