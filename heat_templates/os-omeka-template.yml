@@ -193,13 +193,13 @@ resources:
               - unzip
               - ansible
             write_files:
-            - content: |
-                #!/bin/bash
-                echo "I hate chef"
-              path: /tmp/run_ansible.sh
-              permissions: "0755"
+              - content: |
+                  #!/bin/bash
+                  echo "I hate chef"
+                path: /tmp/run_ansible.sh
+                permissions: "0755"
             runcmd:
-            - bash /tmp/run_ansible.sh
+              - bash /tmp/run_ansible.sh
           params:
             DOUPDATES: { get_param: do_updates }
             DOUPGRADES: { get_param: do_upgrades }
