@@ -195,7 +195,15 @@ resources:
             write_files:
               - content: |
                   #!/bin/bash
-                  echo "I hate chef"
+                  ### Clone ansible repo
+                  echo "Cloning the ansible repo..."
+                  git clone https://github.com/ubcarc/openstack-ansible-omeka.git /tmp/app 2>&1
+                  ### Run the setup script
+                  echo "Execute the setup script..."
+                  pushd /tmp/app
+                  ./setup_everything.sh 2>&1
+                  popd
+                  exit 0
                 path: /tmp/run_ansible.sh
                 permissions: "0755"
             runcmd:
