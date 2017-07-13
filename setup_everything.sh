@@ -3,6 +3,10 @@
 # Script variables
 PASSWD_GEN_CMD="openssl rand -base64 16"
 
+touch .rnd
+PWD=`pwd`
+export RANDFILE="${PWD}/.rnd"
+
 # Generate random passwords for MySQL accounts
 MYSQL_ROOT_PASSWORD=`${PASSWD_GEN_CMD}`
 MYSQL_OMEKA_PASSWORD=`${PASSWD_GEN_CMD}`
