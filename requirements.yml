@@ -6,5 +6,5 @@
 - src: geerlingguy.php
 - src: geerlingguy.apache-php-fpm
 - src: geerlingguy.php-mysql
-- src: zerohacks.imagemagick
+#- src: zerohacks.imagemagick
 
