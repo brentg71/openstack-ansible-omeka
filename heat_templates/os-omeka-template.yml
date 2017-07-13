@@ -12,7 +12,6 @@ parameter_groups:
     - sg_http_port
     - sg_https_port
     - private_network
-    - private_subnet
     - public_network
     - kp_name
     - vol_name
@@ -60,16 +59,6 @@ parameters:
     default: ivm-814_network
     constraints:
       - custom_constraint: neutron.network
-
-  private_subnet:
-    type: string
-    label: Specify the private network subnet (west-cloud/east-cloud)
-    description: Private network subnet used for this instance
-    default: 7a5b3a38-8ff0-4711-b3a6-fbde349878f8
-    constraints:
-      - allowed_values:
-        - 7a5b3a38-8ff0-4711-b3a6-fbde349878f8
-        - 5decb68b-3172-42a9-8dc9-7e8b1e2a7515
 
   public_network:
     type: string
@@ -167,8 +156,6 @@ resources:
   instance_port:
     type: OS::Neutron::Port
     properties:
-      fixed_ips:
-        - subnet_id: { get_param: private_subnet }
       network: { get_param: private_network }
       security_groups:
         - { get_resource: instance_security_group }
