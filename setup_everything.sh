@@ -11,6 +11,8 @@ export RANDFILE="${PWD}/.rnd"
 MYSQL_ROOT_PASSWORD=`${PASSWD_GEN_CMD}`
 MYSQL_OMEKA_PASSWORD=`${PASSWD_GEN_CMD}`
 
+unset RANDFILE
+
 # Install requisite Ansible Galaxy roles
 ansible-galaxy install -r requirements.yml
 
