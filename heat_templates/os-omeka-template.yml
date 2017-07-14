@@ -25,6 +25,7 @@ parameter_groups:
     parameters:
     - do_updates
     - do_upgrades
+    - deployment_repo_url
    
 
 parameters:
@@ -132,6 +133,12 @@ parameters:
         - "true"
         - "false"
 
+  deployment_repo_url:
+    type: string
+    label: Deployment repository URL
+    description: URL to Git repo used to deploy the primary application
+    default: https://github.com/ubcarc/openstack-ansible-omeka.git
+
 
 resources:
   instance_security_group:
@@ -192,9 +199,13 @@ resources:
               - git
               - unzip
               - ansible
+            runcmd:
+              - ["git", "clone", "DEPLOYMENTREPOURL", "/tmp/app"]
+              - ["chown", "-R", "ubuntu:", "/tmp/app"]
           params:
             DOUPDATES: { get_param: do_updates }
             DOUPGRADES: { get_param: do_upgrades }
+            DEPLOYMENTREPOURL: { get_param: deployment_repo_url }
 
   instance_floating_ip:
     type: OS::Neutron::FloatingIP
