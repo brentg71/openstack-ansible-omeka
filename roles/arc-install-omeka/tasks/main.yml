@@ -8,6 +8,7 @@
   tags:
   - omeka
 
+
 - name: Download omeka source package
   get_url:
     url: "{{ omeka_src_url }}"
@@ -15,6 +16,7 @@
   when: omeka_dir.stat.exists == False
   tags:
   - omeka
+
 
 - name: Unarchive the omeka source package
   unarchive:
@@ -26,6 +28,7 @@
   tags:
   - omeka
 
+
 - name: Remove the omeka source package
   file:
     path: "{{ web_document_root }}/{{ omeka_src_file }}"
@@ -34,11 +37,13 @@
   tags:
   - omeka
 
+
 - name: Rename the omeka web directory
   command: creates="{{ omeka_web_dir }}" mv "{{ omeka_old_dir }}" "{{ omeka_web_dir }}"
   when: unarchive_src.changed
   tags:
   - omeka
+
 
 - name: Check (AGAIN) if omeka is already installed
   stat:
@@ -52,7 +57,7 @@
   template:
     src: "{{ omeka_db_conf_src }}"
     dest: "{{ omeka_db_conf_dest }}"
-    backup: yes
+    backup: no
   when: omeka_dir.stat.exists
   tags:
   - omeka
@@ -79,4 +84,3 @@
   when: omeka_dir.stat.exists
   tags:
   - omeka
-
