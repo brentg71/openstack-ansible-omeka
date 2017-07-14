@@ -200,8 +200,8 @@ resources:
               - unzip
               - ansible
             runcmd:
-              - ["git", "clone", "DEPLOYMENTREPOURL", "/tmp/deploy"]
-              - ["chown", "-R", "ubuntu:", "/tmp/deploy"]
+              - ["git", "clone", "DEPLOYMENTREPOURL", "/home/ubuntu/deploy"]
+              - ["chown", "-R", "ubuntu:", "/home/ubuntu/deploy"]
           params:
             DOUPDATES: { get_param: do_updates }
             DOUPGRADES: { get_param: do_upgrades }
