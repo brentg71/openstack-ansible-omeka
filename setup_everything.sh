@@ -14,7 +14,7 @@ MYSQL_OMEKA_PASSWORD=`${PASSWD_GEN_CMD}`
 unset RANDFILE
 
 # Install requisite Ansible Galaxy roles
-ansible-galaxy install -r requirements.yml
+./setup_requirements.sh
 
 # Run the default playbook
 ansible-playbook ./site.yml --extra-vars "mysql_root_password=$MYSQL_ROOT_PASSWORD omeka_password=$MYSQL_OMEKA_PASSWORD"
