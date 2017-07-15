@@ -201,6 +201,8 @@ resources:
               - ansible
             runcmd:
               - ["git", "clone", "DEPLOYMENTREPOURL", "/home/ubuntu/deploy"]
+              - ["cd", "/home/ubuntu/deploy"]
+              - ["bash", "./setup_requirements.sh"]
               - ["chown", "-R", "ubuntu:", "/home/ubuntu/deploy"]
           params:
             DOUPDATES: { get_param: do_updates }
