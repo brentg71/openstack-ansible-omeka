@@ -4,7 +4,6 @@
 - src: franklinkim.openssl
 - src: geerlingguy.apache
 - src: geerlingguy.php
-- src: geerlingguy.apache-php-fpm
 - src: geerlingguy.php-mysql
-#- src: zerohacks.imagemagick
+- src: geerlingguy.apache-php-fpm
 
