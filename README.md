@@ -65,3 +65,5 @@ Project for automating the installation of Omeka on Ubuntu-16.04 using Compute C
 15. Wait for the script to finish. If your setup went properly then you should not see any messages resembling errors and when the script finishes you should be able to access your Omeka site by entering **"[YOUR_FLOATING_IP]/omeka"** into your browser to begin the web-based setup.
 ![Successful Web-page redirect to Omeka login page](/docs/images/15.png)
 *Successful Web-page redirect to Omeka login page*
+
+**\* Note that THE FIRST PERSON to access the site will be able to carry out the web-based setup so it is highly recommended that you do not leave this step for later**
