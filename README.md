@@ -31,13 +31,13 @@ Project for automating the installation of Omeka on Ubuntu-16.04 using Compute C
   * Your West/East Cloud password in the password field
   * SSH/HTTP/HTTPS port fields to default
   * Your project's private network in the private network field
-  * VLAN3337 for the public network on West Cloud or IDONTKNOWWHAT on East Cloud
+  * **VLAN3337** for the public network on West Cloud or **net04_ext** on East Cloud
   * A key pair of your choice for the key pair. If you are unclear on this step then refer to [Compute Canada's Documentation](https://docs.computecanada.ca/wiki/Cloud_Quick_Start) for SSH keys.
   * Any name you want for the root volume
   * Whatever size you need your storage to be (in GB) for size of the root volume.
   * Ubuntu-16.04-Xenial for image used to create the root volume
   * Whatever name you want for the name of the instance
-  * The flavor to fit your needs for the hardware type. Refer to [Compute Canada's Documentation](https://docs.computecanada.ca/wiki/Virtual_machine_flavors) for details on what these values mean.
+  * The flavor to fit your needs for the hardware type. Refer to [Compute Canada's Documentation](https://docs.computecanada.ca/wiki/Virtual_machine_flavors) for details on what these values mean. Dev or Test recommendation is a p2-(3gb/1.5gb).
   * True for both Software Package Index Updates and Upgrades to apply software updates on first boot.
   * The default repository for Deployment Repository
 ![Stack --> Launch Stack](/docs/images/8.png)
