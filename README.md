@@ -1,5 +1,5 @@
 # openstack-ansible-omeka
-Project for automating the installation of Omeka on Ubuntu-16.04 using Compute Canada cloud resources
+Project for automating the installation of Omeka 2.5 on Ubuntu-16.04 using Compute Canada cloud resources
 
 ## Quick Start
 
